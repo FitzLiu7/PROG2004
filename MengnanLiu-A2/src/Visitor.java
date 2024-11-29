@@ -2,14 +2,14 @@ public class Visitor extends Person {
   private String membershipType;
   private String ticketNumber;
 
-  // Initializing fields
+  // 缺省构造函数
   public Visitor() {
     super();
     this.membershipType = "";
     this.ticketNumber = "";
   }
 
-  // Initialize all fields, including those in base class
+  // 带有参数的构造函数
   public Visitor(String name, int age, String gender, String membershipType, String ticketNumber) {
     super(name, age, gender);
     this.membershipType = membershipType;

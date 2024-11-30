@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,7 +6,7 @@ import java.util.Queue;
 
 public class Ride implements RideInterface {
   private String rideName;
-  private int maxCapacity;
+  private String attractionsSize;
   private boolean isOpen;
   private Employee rideOperator;
   private Queue<Visitor> rideQueue;
@@ -16,7 +15,7 @@ public class Ride implements RideInterface {
   // 缺省构造函数
   public Ride() {
     this.rideName = "";
-    this.maxCapacity = 0;
+    this.attractionsSize = "";
     this.isOpen = false;
     this.rideOperator = null;
     this.rideQueue = new LinkedList<>();
@@ -24,9 +23,9 @@ public class Ride implements RideInterface {
   }
 
   // 带有参数的构造函数
-  public Ride(String rideName, int maxCapacity, boolean isOpen, Employee rideOperator) {
+  public Ride(String rideName, String AttractionsSize, boolean isOpen, Employee rideOperator) {
     this.rideName = rideName;
-    this.maxCapacity = maxCapacity;
+    this.attractionsSize = attractionsSize;
     this.isOpen = isOpen;
     this.rideOperator = rideOperator;
     this.rideQueue = new LinkedList<>();
@@ -34,7 +33,7 @@ public class Ride implements RideInterface {
   }
 
 
-  //getter and setter
+  //getter and setter rideName, attractionsSize, isOpen and rideOperator
   public String getRideName() {
     return rideName;
   }
@@ -43,12 +42,12 @@ public class Ride implements RideInterface {
     this.rideName = rideName;
   }
 
-  public int getMaxCapacity() {
-    return maxCapacity;
+  public String getAttractionsSize() {
+    return attractionsSize;
   }
 
-  public void setMaxCapacity(int maxCapacity) {
-    this.maxCapacity = maxCapacity;
+  public void setAttractionsSize(String attractionsSize) {
+    attractionsSize = attractionsSize;
   }
 
   public boolean isOpen() {
@@ -66,7 +65,7 @@ public class Ride implements RideInterface {
   public void setRideOperator(Employee rideOperator) {
     this.rideOperator = rideOperator;
   }
-
+  
   @Override
   // 将游客添加到队列
   public void addVisitorToQueue(Visitor visitor) {
@@ -108,7 +107,7 @@ public class Ride implements RideInterface {
       rideHistory.add(visitor);
       System.out.println(visitor.getName() + " added to the rideHistory");
     } else {
-      System.out.println(visitor.getName() + " is already in rideHistory");
+      System.out.println(visitor.getName() + " already in rideHistory");
     }
   }
 
@@ -135,7 +134,7 @@ public class Ride implements RideInterface {
     } else {
       System.out.println("rideHistroy: ");
       for (Visitor visitor : rideHistory) {
-        System.out.println(visitor.getName() + "(age: " + visitor.getAge() + ", gender: " + visitor.getGender() + ")");
+      System.out.println(visitor.getName() + ", age: " + visitor.getAge() + ", gender: " + visitor.getGender() + ", membershipType: " + visitor.getMembershipType() + ", ticketNumber: " + visitor.getTicketNumber());
       }
     }
   }
@@ -143,6 +142,6 @@ public class Ride implements RideInterface {
   // 将游客按年龄大小进行排序
   public void SortRideHistory() {
     Collections.sort(rideHistory, new VisitorComparator());
-    System.out.println("RideHistory has been sorted by age and name");
+    System.out.println("RideHistory has been sorted by age");
   }
 }

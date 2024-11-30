@@ -11,6 +11,8 @@ public class Ride implements RideInterface {
   private Employee rideOperator;
   private Queue<Visitor> rideQueue;
   private List<Visitor> rideHistory;
+  private int maxRider;
+  private int numberOfCycles;
 
   // 缺省构造函数
   public Ride() {
@@ -20,20 +22,23 @@ public class Ride implements RideInterface {
     this.rideOperator = null;
     this.rideQueue = new LinkedList<>();
     this.rideHistory = new ArrayList<>();
+    this.maxRider = 1;
+    this.numberOfCycles = 0;
   }
 
   // 带有参数的构造函数
-  public Ride(String rideName, String AttractionsSize, boolean isOpen, Employee rideOperator) {
+  public Ride(String rideName, String AttractionsSize, boolean isOpen, Employee rideOperator, int maxRider, int numberOfCycles) {
     this.rideName = rideName;
     this.attractionsSize = attractionsSize;
     this.isOpen = isOpen;
     this.rideOperator = rideOperator;
     this.rideQueue = new LinkedList<>();
     this.rideHistory = new ArrayList<>();
+    this.maxRider = maxRider;
+    this.numberOfCycles = numberOfCycles;
   }
 
-
-  //getter and setter rideName, attractionsSize, isOpen and rideOperator
+  //getter and setter rideName, attractionsSize, isOpen and rideOperator ,  maxRider and numberOfCycles
   public String getRideName() {
     return rideName;
   }
@@ -47,7 +52,7 @@ public class Ride implements RideInterface {
   }
 
   public void setAttractionsSize(String attractionsSize) {
-    attractionsSize = attractionsSize;
+    this.attractionsSize = attractionsSize;
   }
 
   public boolean isOpen() {
@@ -65,9 +70,25 @@ public class Ride implements RideInterface {
   public void setRideOperator(Employee rideOperator) {
     this.rideOperator = rideOperator;
   }
-  
-  @Override
+
+  public int getMaxRider() {
+    return maxRider;
+  }
+
+  public void setMaxRider(int maxRider) {
+    this.maxRider = maxRider;
+  }
+
+  public int getNumberOfCycles() {
+    return numberOfCycles;
+  }
+
+  public void setNumberOfCycles(int numberOfCycles) {
+    this.numberOfCycles = numberOfCycles;
+  }
+
   // 将游客添加到队列
+  @Override
   public void addVisitorToQueue(Visitor visitor) {
     // TODO Auto-generated method stub
     if (visitor != null) {
@@ -144,4 +165,31 @@ public class Ride implements RideInterface {
     Collections.sort(rideHistory, new VisitorComparator());
     System.out.println("RideHistory has been sorted by age");
   }
+
+  //分配操作员，检查等待中的游客，将游客移至历史记录
+  @Override
+  public void runOneCycle() {
+    // TODO Auto-generated method stub
+    if(rideOperator == null){
+      System.out.println("Operation prohibited, no operator available.");
+      return;
+    }
+    if(rideQueue.isEmpty()){
+      System.out.println("Operation prohibited, no visitor in the queue.");
+      return;
+    }
+    System.out.println("running ride cycle for " + rideName);
+    // 检查乘坐人次
+    int ridersThisCycle = 0;
+    while (ridersThisCycle < maxRider && !rideQueue.isEmpty()) {
+      //remove from the queue
+      Visitor visitor = rideQueue.poll();
+      rideHistory.add(visitor);
+      ridersThisCycle++;
+      System.out.println(visitor.getName() + " has taken the ride.");
+    }
+    numberOfCycles++;
+    System.out.println("ride cycle completed. Total cycles: " + numberOfCycles);
+  }
+  
 }

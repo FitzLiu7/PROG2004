@@ -3,11 +3,12 @@ public class AssignmentTwo {
         // partThree();
         // partFourA();
         // partFourB();
+        // partFive();
     }
 
     public static void partThree() {
         Employee employee1 = new Employee("James", 32, "male", "Security Officer", "5 years");
-        Ride storm = new Ride("Storm", "Large", true, employee1);
+        Ride storm = new Ride("Storm", "Large", true, employee1, 1, 1);
         Visitor visitor1 = new Visitor("John", 25, "male", "VIP", "v12");
         Visitor visitor2 = new Visitor("David", 28, "male", "Normal", "n23");
         Visitor visitor3 = new Visitor("Michael", 31, "male", "SVIP", "s46");
@@ -27,7 +28,7 @@ public class AssignmentTwo {
 
     public static void partFourA() {
         Employee employee2 = new Employee("Fizz", 29, "male", "Security Officer", "3 years");
-        Ride pirateShip = new Ride("PirateShip", "Medium", true, employee2);
+        Ride pirateShip = new Ride("PirateShip", "Medium", true, employee2, 1, 0);
         Visitor visitor6 = new Visitor("Robert", 32, "male", "SVIP", "s8");
         Visitor visitor7 = new Visitor("Emma", 26, "female", "VIP", "v45");
         Visitor visitor8 = new Visitor("Sophia", 30, "female", "Normal", "v21");
@@ -49,7 +50,7 @@ public class AssignmentTwo {
 
     public static void partFourB() {
         Employee employee3 = new Employee("Voli", 37, "male", "Security Officer", "8 years");
-        Ride bumperCars = new Ride("BumperCars", "Small", true, employee3);
+        Ride bumperCars = new Ride("BumperCars", "Small", true, employee3, 1, 0);
         Visitor visitor11 = new Visitor("Michael", 29, "male", "Normal", "n6");
         Visitor visitor12 = new Visitor("Daniel", 22, "male", "VIP", "v17");
         Visitor visitor13 = new Visitor("Isabella", 28, "female", "SVIP", "s28");
@@ -68,7 +69,38 @@ public class AssignmentTwo {
         bumperCars.printRideHistory();
     }
 
-    public void partFive() {
+    public static void partFive() {
+        Employee employee4 = new Employee("Lance", 30, "male", "Security Officer", "4 years");
+        Ride carousel = new Ride("Carousel", "Small", true, employee4, 6, 0);
+        Visitor visitor16 = new Visitor("Ava", 26, "female", "VIP", "v30");
+        Visitor visitor17 = new Visitor("Henry", 31, "male", "Normal", "n11");
+        Visitor visitor18 = new Visitor("Charlotte", 23, "female", "SVIP", "s37");
+        Visitor visitor19 = new Visitor("Jackson", 32, "male", "VIP", "v3");
+        Visitor visitor20 = new Visitor("Amelia", 27, "female", "Normal", "v19");
+        Visitor visitor21 = new Visitor("Sebastian", 30, "male", "VIP", "v29");
+        Visitor visitor22 = new Visitor("Lily", 24, "female", "SVIP", "s5");
+        Visitor visitor23 = new Visitor("Benjamin", 26, "male", "Normal", "n8");
+        Visitor visitor24 = new Visitor("Harper", 29, "female", "VIP", "v10");
+        Visitor visitor25 = new Visitor("Jacob", 32, "male", "SVIP", "s40");
+        carousel.addVisitorToQueue(visitor16);
+        carousel.addVisitorToQueue(visitor17);
+        carousel.addVisitorToQueue(visitor18);
+        carousel.addVisitorToQueue(visitor19);
+        carousel.addVisitorToQueue(visitor20);
+        carousel.addVisitorToQueue(visitor21);
+        carousel.addVisitorToQueue(visitor22);
+        carousel.addVisitorToQueue(visitor23);
+        carousel.addVisitorToQueue(visitor24);
+        carousel.addVisitorToQueue(visitor25);
+        System.out.println("------------------------------");
+        carousel.printQueue();
+        System.out.println("------------------------------");
+        carousel.runOneCycle();
+        System.out.println("------------------------------");
+        carousel.printQueue();
+        System.out.println("------------------------------");
+        carousel.printRideHistory();
+        System.out.println("------------------------------");
     }
 
     public void partSix() {

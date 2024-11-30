@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Ride implements RideInterface {
@@ -7,6 +11,7 @@ public class Ride implements RideInterface {
   private boolean isOpen;
   private Employee rideOperator;
   private Queue<Visitor> rideQueue;
+  private List<Visitor> rideHistory;
 
   // 缺省构造函数
   public Ride() {
@@ -15,6 +20,7 @@ public class Ride implements RideInterface {
     this.isOpen = false;
     this.rideOperator = null;
     this.rideQueue = new LinkedList<>();
+    this.rideHistory = new ArrayList<>();
   }
 
   // 带有参数的构造函数
@@ -24,8 +30,11 @@ public class Ride implements RideInterface {
     this.isOpen = isOpen;
     this.rideOperator = rideOperator;
     this.rideQueue = new LinkedList<>();
+    this.rideHistory = new ArrayList<>();
   }
 
+
+  //getter and setter
   public String getRideName() {
     return rideName;
   }
@@ -59,6 +68,7 @@ public class Ride implements RideInterface {
   }
 
   @Override
+  // 将游客添加到队列
   public void addVisitorToQueue(Visitor visitor) {
     // TODO Auto-generated method stub
     if (visitor != null) {
@@ -69,6 +79,7 @@ public class Ride implements RideInterface {
     }
   }
 
+  // 在队列中移除游客
   @Override
   public void removeVisitorFromQueue(Visitor visitor) {
     // TODO Auto-generated method stub
@@ -80,6 +91,7 @@ public class Ride implements RideInterface {
     }
   }
 
+  // 打印队列
   @Override
   public void printQueue() {
     // TODO Auto-generated method stub
@@ -88,4 +100,49 @@ public class Ride implements RideInterface {
     }
   }
 
+  // 将游客添加到历史记录中
+  @Override
+  public void addVisitorToHistory(Visitor visitor) {
+    // TODO Auto-generated method stub
+    if (!rideHistory.contains(visitor)) {
+      rideHistory.add(visitor);
+      System.out.println(visitor.getName() + " added to the rideHistory");
+    } else {
+      System.out.println(visitor.getName() + " is already in rideHistory");
+    }
+  }
+
+  // 检查历史纪录中的游客
+  @Override
+  public boolean checkVisitorFromHistory(Visitor visitor) {
+    // TODO Auto-generated method stub
+    return rideHistory.contains(visitor);
+  }
+
+  // 检查历史纪录中游客的数量
+  @Override
+  public int numberOfVisitors() {
+    // TODO Auto-generated method stub
+    return rideHistory.size();
+  }
+
+  // 打印使用过设施的游客的详细信息
+  @Override
+  public void printRideHistory() {
+    // TODO Auto-generated method stub
+    if (rideHistory.isEmpty()) {
+      System.out.println("rideHistory is empty");
+    } else {
+      System.out.println("rideHistroy: ");
+      for (Visitor visitor : rideHistory) {
+        System.out.println(visitor.getName() + "(age: " + visitor.getAge() + ", gender: " + visitor.getGender() + ")");
+      }
+    }
+  }
+
+  // 将游客按年龄大小进行排序
+  public void SortRideHistory() {
+    Collections.sort(rideHistory, new VisitorComparator());
+    System.out.println("RideHistory has been sorted by age and name");
+  }
 }

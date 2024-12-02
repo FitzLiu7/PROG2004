@@ -1,11 +1,11 @@
 public class AssignmentTwo {
     public static void main(String[] args) {
-        // partThree();
-        // partFourA();
-        // partFourB();
-        // partFive();
-        // partSix();
-        // partSeven();
+        partThree();
+        partFourA();
+        partFourB();
+        partFive();
+        partSix();
+        partSeven();
     }
 
     public static void partThree() {

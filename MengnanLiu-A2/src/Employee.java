@@ -2,14 +2,12 @@ public class Employee extends Person {
   private String position;
   private String workingExperience;
 
-  // 缺省构造函数
   public Employee() {
     super();
     this.position = "";
     this.workingExperience = "";
   }
 
-  // 带有参数的构造函数
   public Employee(String name, int age, String gender, String position, String workingExperience) {
     super(name, age, gender);
     this.position = position;

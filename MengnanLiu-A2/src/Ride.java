@@ -19,7 +19,6 @@ public class Ride implements RideInterface {
   private int maxRider;
   private int numberOfCycles;
 
-  // 缺省构造函数
   public Ride() {
     this.rideName = "";
     this.attractionsSize = "";
@@ -31,7 +30,6 @@ public class Ride implements RideInterface {
     this.numberOfCycles = 0;
   }
 
-  // 带有参数的构造函数
   public Ride(String rideName, String attractionsSize, boolean isOpen, Employee rideOperator, int maxRider,
       int numberOfCycles) {
     this.rideName = rideName;
@@ -95,7 +93,6 @@ public class Ride implements RideInterface {
     this.numberOfCycles = numberOfCycles;
   }
 
-  // 将游客添加到队列
   @Override
   public void addVisitorToQueue(Visitor visitor) {
     // TODO Auto-generated method stub
@@ -107,7 +104,6 @@ public class Ride implements RideInterface {
     }
   }
 
-  // 在队列中移除游客
   @Override
   public void removeVisitorFromQueue(Visitor visitor) {
     // TODO Auto-generated method stub
@@ -119,7 +115,6 @@ public class Ride implements RideInterface {
     }
   }
 
-  // 打印队列
   @Override
   public void printQueue() {
     // TODO Auto-generated method stub
@@ -128,7 +123,6 @@ public class Ride implements RideInterface {
     }
   }
 
-  // 将游客添加到历史记录中
   @Override
   public void addVisitorToHistory(Visitor visitor) {
     // TODO Auto-generated method stub
@@ -140,21 +134,18 @@ public class Ride implements RideInterface {
     }
   }
 
-  // 检查历史纪录中的游客
   @Override
   public boolean checkVisitorFromHistory(Visitor visitor) {
     // TODO Auto-generated method stub
     return rideHistory.contains(visitor);
   }
 
-  // 检查历史纪录中游客的数量
   @Override
   public int numberOfVisitors() {
     // TODO Auto-generated method stub
     return rideHistory.size();
   }
 
-  // 打印使用过设施的游客的详细信息
   @Override
   public void printRideHistory() {
     // TODO Auto-generated method stub
@@ -169,13 +160,11 @@ public class Ride implements RideInterface {
     }
   }
 
-  // 将游客按年龄大小进行排序
   public void SortRideHistory() {
     Collections.sort(rideHistory, new VisitorComparator());
     System.out.println("RideHistory has been sorted by age");
   }
 
-  // 分配操作员，检查等待中的游客，将游客移至历史记录
   @Override
   public void runOneCycle() {
     // TODO Auto-generated method stub
@@ -188,7 +177,6 @@ public class Ride implements RideInterface {
       return;
     }
     System.out.println("running ride cycle for " + rideName);
-    // 检查乘坐人次
     int ridersThisCycle = 0;
     while (ridersThisCycle < maxRider && !rideQueue.isEmpty()) {
       // remove from the queue
@@ -201,7 +189,6 @@ public class Ride implements RideInterface {
     System.out.println("ride cycle completed. Total cycles: " + numberOfCycles);
   }
 
-  // 导出ridehistory
   public void exportRideHistory() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("rideHistory"))) {
       if (rideHistory.isEmpty()) {
@@ -209,7 +196,6 @@ public class Ride implements RideInterface {
         return;
       }
       for (Visitor visitor : rideHistory) {
-        // 调用tostring方法导出
         writer.write(visitor.toString());
         writer.newLine();
       }

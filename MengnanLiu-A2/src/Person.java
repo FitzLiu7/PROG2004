@@ -1,17 +1,14 @@
 public abstract class Person {
-  // Store details
   private String name;
   private int age;
   private String gender;
 
-  // 缺省构造函数
   public Person() {
     this.name = "";
     this.age = 0;
     this.gender = "";
   }
 
-  // 带有参数的构造函数
   public Person(String name, int age, String gender) {
     this.name = name;
     this.age = age;

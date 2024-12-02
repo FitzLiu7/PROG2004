@@ -34,4 +34,8 @@ public class Visitor extends Person {
     this.ticketNumber = ticketNumber;
   }
 
+  @Override
+  public String toString() {
+    return getName() + ", " + getAge() + ", " + getGender() + ", " + getMembershipType() + ", " + getTicketNumber();
+  }
 }

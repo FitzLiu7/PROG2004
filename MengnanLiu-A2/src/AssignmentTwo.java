@@ -4,6 +4,8 @@ public class AssignmentTwo {
         // partFourA();
         // partFourB();
         // partFive();
+        // partSix();
+        // partSeven();
     }
 
     public static void partThree() {
@@ -92,6 +94,7 @@ public class AssignmentTwo {
         carousel.addVisitorToQueue(visitor23);
         carousel.addVisitorToQueue(visitor24);
         carousel.addVisitorToQueue(visitor25);
+
         System.out.println("------------------------------");
         carousel.printQueue();
         System.out.println("------------------------------");
@@ -100,13 +103,31 @@ public class AssignmentTwo {
         carousel.printQueue();
         System.out.println("------------------------------");
         carousel.printRideHistory();
+    }
+
+    public static void partSix() {
+        Employee employee5 = new Employee("Leon", 34, "male", "Security Officer", "7 years");
+        Ride ferrisWheel = new Ride("FerrisWheel", "Large", true, employee5, 6, 0);
+        Visitor visitor26 = new Visitor("Zoe", 31, "female", "Normal", "v38");
+        Visitor visitor27 = new Visitor("Jack", 25, "male", "VIP", "v13");
+        Visitor visitor28 = new Visitor("Ella", 24, "female", "SVIP", "s11");
+        Visitor visitor29 = new Visitor("Matthew", 29, "male", "Normal", "n25");
+        Visitor visitor30 = new Visitor("Aiden", 27, "male", "VIP", "v41");
+        ferrisWheel.addVisitorToQueue(visitor26);
+        ferrisWheel.addVisitorToQueue(visitor27);
+        ferrisWheel.addVisitorToQueue(visitor28);
+        ferrisWheel.addVisitorToQueue(visitor29);
+        ferrisWheel.addVisitorToQueue(visitor30);
         System.out.println("------------------------------");
-        carousel.exportRideHistory();
+        ferrisWheel.runOneCycle();
+        System.out.println("------------------------------");
+        ferrisWheel.exportRideHistory();
+        System.out.println("------------------------------");
     }
 
-    public void partSix() {
-    }
-
-    public void partSeven() {
+    public static void partSeven() {
+        Employee employee6 = new Employee("Chenny", 33, "male", "Security Officer", "4years");
+        Ride goKart = new Ride("GoKart", "Large", true, employee6, 6, 0);
+        goKart.importRideHistory();
     }
 }

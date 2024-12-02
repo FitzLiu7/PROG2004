@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,8 +44,9 @@ public class Ride implements RideInterface {
     this.numberOfCycles = numberOfCycles;
   }
 
-  // getter and setter rideName, attractionsSize, isOpen and rideOperator ,
-  // maxRider and numberOfCycles
+  // getter and setter rideName, attractionsSize, isOpen and rideOperator
+  // ,maxRider and numberOfCycles
+
   public String getRideName() {
     return rideName;
   }
@@ -198,26 +201,47 @@ public class Ride implements RideInterface {
     System.out.println("ride cycle completed. Total cycles: " + numberOfCycles);
   }
 
-  /**
-   * 导出ridehistory
-   */
+  // 导出ridehistory
   public void exportRideHistory() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("rideHistory"))) {
-      //判断是否为空
       if (rideHistory.isEmpty()) {
         System.out.println("rideHistory is empty");
         return;
       }
-      for(Visitor visitor : rideHistory){
-        //调用tostring方法导出
+      for (Visitor visitor : rideHistory) {
+        // 调用tostring方法导出
         writer.write(visitor.toString());
         writer.newLine();
       }
-      System.out.println("successful");
+      System.out.println("Import successful");
     } catch (IOException e) {
       // TODO: handle exception
       System.out.println(e.getMessage());
     }
   }
 
+  public void importRideHistory() {
+    try (BufferedReader reader = new BufferedReader(new FileReader("rideHistory"))) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        String[] parts = line.split(", ");
+        if (parts.length == 5) {
+          String name = parts[0];
+          int age = Integer.parseInt(parts[1]);
+          String gender = parts[2];
+          String type = parts[3];
+          String id = parts[4];
+          rideHistory.add(new Visitor(name, age, gender, type, id));
+        } else {
+          System.out.println(line);
+        }
+      }
+      System.out.println("Import successful. Ride history details:");
+      for (Visitor visitor : rideHistory) {
+        System.out.println(visitor);
+      }
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+    }
+  }
 }

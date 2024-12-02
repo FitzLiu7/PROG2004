@@ -101,6 +101,7 @@ public class AssignmentTwo {
         System.out.println("------------------------------");
         carousel.printRideHistory();
         System.out.println("------------------------------");
+        carousel.exportRideHistory();
     }
 
     public void partSix() {

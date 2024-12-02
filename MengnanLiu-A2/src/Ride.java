@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -27,7 +30,8 @@ public class Ride implements RideInterface {
   }
 
   // 带有参数的构造函数
-  public Ride(String rideName, String AttractionsSize, boolean isOpen, Employee rideOperator, int maxRider, int numberOfCycles) {
+  public Ride(String rideName, String attractionsSize, boolean isOpen, Employee rideOperator, int maxRider,
+      int numberOfCycles) {
     this.rideName = rideName;
     this.attractionsSize = attractionsSize;
     this.isOpen = isOpen;
@@ -38,7 +42,8 @@ public class Ride implements RideInterface {
     this.numberOfCycles = numberOfCycles;
   }
 
-  //getter and setter rideName, attractionsSize, isOpen and rideOperator ,  maxRider and numberOfCycles
+  // getter and setter rideName, attractionsSize, isOpen and rideOperator ,
+  // maxRider and numberOfCycles
   public String getRideName() {
     return rideName;
   }
@@ -155,7 +160,8 @@ public class Ride implements RideInterface {
     } else {
       System.out.println("rideHistroy: ");
       for (Visitor visitor : rideHistory) {
-      System.out.println(visitor.getName() + ", age: " + visitor.getAge() + ", gender: " + visitor.getGender() + ", membershipType: " + visitor.getMembershipType() + ", ticketNumber: " + visitor.getTicketNumber());
+        System.out.println(visitor.getName() + ", age: " + visitor.getAge() + ", gender: " + visitor.getGender()
+            + ", membershipType: " + visitor.getMembershipType() + ", ticketNumber: " + visitor.getTicketNumber());
       }
     }
   }
@@ -166,15 +172,15 @@ public class Ride implements RideInterface {
     System.out.println("RideHistory has been sorted by age");
   }
 
-  //分配操作员，检查等待中的游客，将游客移至历史记录
+  // 分配操作员，检查等待中的游客，将游客移至历史记录
   @Override
   public void runOneCycle() {
     // TODO Auto-generated method stub
-    if(rideOperator == null){
+    if (rideOperator == null) {
       System.out.println("Operation prohibited, no operator available.");
       return;
     }
-    if(rideQueue.isEmpty()){
+    if (rideQueue.isEmpty()) {
       System.out.println("Operation prohibited, no visitor in the queue.");
       return;
     }
@@ -182,7 +188,7 @@ public class Ride implements RideInterface {
     // 检查乘坐人次
     int ridersThisCycle = 0;
     while (ridersThisCycle < maxRider && !rideQueue.isEmpty()) {
-      //remove from the queue
+      // remove from the queue
       Visitor visitor = rideQueue.poll();
       rideHistory.add(visitor);
       ridersThisCycle++;
@@ -191,5 +197,27 @@ public class Ride implements RideInterface {
     numberOfCycles++;
     System.out.println("ride cycle completed. Total cycles: " + numberOfCycles);
   }
-  
+
+  /**
+   * 导出ridehistory
+   */
+  public void exportRideHistory() {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("rideHistory"))) {
+      //判断是否为空
+      if (rideHistory.isEmpty()) {
+        System.out.println("rideHistory is empty");
+        return;
+      }
+      for(Visitor visitor : rideHistory){
+        //调用tostring方法导出
+        writer.write(visitor.toString());
+        writer.newLine();
+      }
+      System.out.println("successful");
+    } catch (IOException e) {
+      // TODO: handle exception
+      System.out.println(e.getMessage());
+    }
+  }
+
 }
